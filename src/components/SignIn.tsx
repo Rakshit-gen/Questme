@@ -16,7 +16,7 @@ const SignIn = () => {
             </p>
             <UserAuthForm />
             <p className='mt-3 px-8 text-center text-sm text-zinc-200'>
-                Don't have an account yet? {' '}
+                Does not have an account yet? {' '}
                 <Link href='/sign-up' className='hover:text-zinc-400 text-sm underline underline-offset-4'>Sign Up</Link>
             </p>
         </div>
