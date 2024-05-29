@@ -33,6 +33,13 @@ export async function POST(req: Request) {
       },
     })
 
+    // creator also has to be subscribed
+    await db.userSubscription.create({
+      data: {
+        userId: session.user.id,
+        subredditId: subreddit.id,
+      },
+    })
 
     return new Response(subreddit.name)
   } catch (error) {

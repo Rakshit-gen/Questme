@@ -31,7 +31,7 @@ const MiniCreatePost: FC<MiniCreatePostProps> = ({ session }) => {
         </div>
         <Input
         className='bg-zinc-200'
-          //onClick={() => router.push(pathname + '/submit')}
+          onClick={() => router.push(pathname + '/submit')}
           readOnly
           placeholder='Create post'
         />

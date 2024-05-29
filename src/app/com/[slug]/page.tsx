@@ -5,7 +5,7 @@ import { FC } from 'react'
 import { notFound } from 'next/navigation'
 import { db } from '@/lib/db'
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from '@/config'
-
+import PostFeed from '@/components/PostFeed'
 interface pageProps {
     params:{
         slug: string
@@ -42,6 +42,7 @@ const page = async ({params}: pageProps) => {
     com/{subreddit.name}
   </h1>
   <MiniCreatePost session={session} />
+  <PostFeed initialPosts={subreddit.posts} subredditName={subreddit.name} />
   </>
   )
   
