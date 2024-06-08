@@ -85,7 +85,7 @@ const PostVoteClient = ({
         variant='ghost'
         aria-label='upvote'>
         <ArrowBigUp
-          className={cn('h-4 w-4 text-zinc-200', {
+          className={cn('h-4 w-4 text-zinc-500', {
             'text-emerald-500 fill-emerald-500': currentVote === 'UP',
           })}
         />
@@ -106,7 +106,7 @@ const PostVoteClient = ({
         variant='ghost'
         aria-label='downvote'>
         <ArrowBigDown
-          className={cn('h-4 w-4 text-zinc-200', {
+          className={cn('h-4 w-4 text-zinc-500', {
             'text-red-500 fill-red-500': currentVote === 'DOWN',
           })}
         />
