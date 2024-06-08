@@ -84,7 +84,7 @@ const CommentVotes: FC<CommentVotesProps> = ({
         variant='ghost'
         aria-label='upvote'>
         <ArrowBigUp
-          className={cn('h-5 w-5 text-zinc-700', {
+          className={cn('h-4 w-4 text-zinc-700', {
             'text-emerald-500 fill-emerald-500': currentVote?.type === 'UP',
           })}
         />
