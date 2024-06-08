@@ -105,7 +105,7 @@ const CommentVotes: FC<CommentVotesProps> = ({
         variant='ghost'
         aria-label='downvote'>
         <ArrowBigDown
-          className={cn('h-5 w-5 text-zinc-700', {
+          className={cn('h-4 w-4 text-zinc-700', {
             'text-red-500 fill-red-500': currentVote?.type === 'DOWN',
           })}
         />
