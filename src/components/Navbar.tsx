@@ -20,7 +20,7 @@ const Navbar = async () => {
                 <p className='hidden text-zinc-100 text-sm font-medium md:block'>qME</p>
             </Link>
         <SearchBar />
-        {session?.user ?( <UserAccountNav user={session.user} /> ): (<Link href='sign-in' className={buttonVariants()}>Sign In</Link>)}
+        {session?.user ?( <UserAccountNav user={session.user} /> ): (<Link href='sign-in' className={buttonVariants()}>Login</Link>)}
         </div>
     </div>
     </>
