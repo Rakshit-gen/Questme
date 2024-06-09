@@ -109,7 +109,7 @@ const PostComment: FC<PostCommentProps> = ({
       </div>
 
       {isReplying ? (
-        <div className='grid w-full gap-1.5'>
+        <div className='grid w-full gap-1.5 text-black'>
           <Label htmlFor='comment'>Your comment</Label>
           <div className='mt-2'>
             <Textarea
@@ -127,7 +127,7 @@ const PostComment: FC<PostCommentProps> = ({
               placeholder='What are your thoughts?'
             />
 
-            <div className='mt-2 flex justify-end gap-2'>
+            <div className='mt-2 flex justify-end gap-2 text-black'>
               <Button
                 tabIndex={-1}
                 variant='subtle'
