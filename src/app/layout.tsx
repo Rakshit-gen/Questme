@@ -8,7 +8,7 @@ import Head from 'next/head'
 
 export const metadata = {
   title: 'qME',
-  description: 'A Question board built with Next.js and TypeScript for NITH.',
+  description: 'A Question board built with Next.js and TypeScript for Developers to communicate.',
 }
 
 const inter = Inter({ subsets:['latin'] })
