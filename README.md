@@ -1,4 +1,4 @@
-```markdown
+
 # Quest Me
 
 Welcome to **Quest Me**, a platform inspired by Reddit designed to connect developers and showcase their work. Built with modern web technologies, Quest Me aims to foster a community where developers can share their projects, gain feedback, and collaborate.
