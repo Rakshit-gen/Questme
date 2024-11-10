@@ -4,6 +4,7 @@ import { buttonVariants } from '@/components/ui/Button';
 import { getAuthSession } from '@/lib/auth';
 import CustomFeed from '@/components/homepage/CustomFeed';
 import GeneralFeed from '@/components/homepage/GeneralFeed';
+import AnimatedComponent from '@/components/AnimatedComponent'; // Import the animated component
 
 // Fetching subreddits function
 async function fetchSubreddits() {
@@ -26,9 +27,10 @@ export default async function Home() {
       {/* Sidebar Section for Subreddits */}
       <div className="flex flex-col w-full md:w-1/3 mb-4">
         {/* Subreddit List Section */}
-        <div className='overflow-hidden h-fit rounded-lg border border-gray-200 mb-4'>
-          <h2 className='bg-blue-600 px-6 py-4 text-white font-semibold'>Subreddits</h2>
-          <ul className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
+        <AnimatedComponent>
+          <div className='overflow-hidden h-fit rounded-lg border border-gray-200 mb-4'>
+            <h2 className='bg-blue-600 px-6 py-4 text-white font-semibold'>Subreddits</h2>
+            <ul className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
             {subreddits.map((subreddit: any) => (
               <li key={subreddit.id} className='py-3 text-zinc-200'><a href={`/com/${subreddit.name}`}>
                 <p className="font-semibold">{subreddit.name}</p>
@@ -36,26 +38,29 @@ export default async function Home() {
                 </a></li>
             ))}
           </ul>
-        </div>
+          </div>
+        </AnimatedComponent>
 
         {/* Create Community Section */}
-        <div className='overflow-hidden h-fit rounded-lg border border-gray-200'>
-          <div className='bg-pink-600 px-6 py-4'>
-            <p className='font-semibold py-3 flex items-center gap-1.5'>
-              <HomeIcon className='h-4 w-4' />
-              Create Community
-            </p>
+        <AnimatedComponent>
+          <div className='overflow-hidden h-fit rounded-lg border border-gray-200'>
+            <div className='bg-pink-600 px-6 py-4'>
+              <p className='font-semibold py-3 flex items-center gap-1.5'>
+                <HomeIcon className='h-4 w-4' />
+                Create Community
+              </p>
+            </div>
+            <dl className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
+              <Link
+                className={buttonVariants({
+                  className: 'w-full mt-4 mb-6 bg-blue-500 hover:bg-blue-600 transition duration-200',
+                })}
+                href={`/com/create`}>
+                Create Community
+              </Link>
+            </dl>
           </div>
-          <dl className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
-            <Link
-              className={buttonVariants({
-                className: 'w-full mt-4 mb-6 text-white bg-gray-600 hover:bg-gray-800 transition duration-200',
-              })}
-              href={`/com/create`}>
-              Create Community
-            </Link>
-          </dl>
-        </div>
+        </AnimatedComponent>
       </div>
 
       {/* Main Feed Section */}
