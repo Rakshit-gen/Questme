@@ -1,3 +1,4 @@
+'use client'
 import { Home as HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { buttonVariants } from '@/components/ui/Button'
