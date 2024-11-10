@@ -7,7 +7,7 @@ import GeneralFeed from '@/components/homepage/GeneralFeed';
 
 // Fetching subreddits function
 async function fetchSubreddits() {
-  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
+  const baseUrl = 'https://flyuphigh.vercel.app/' || 'http://localhost:3000';
   const res = await fetch(`${baseUrl}/api/subreddits`);
   
   if (!res.ok) {
@@ -49,7 +49,7 @@ export default async function Home() {
           <dl className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
             <Link
               className={buttonVariants({
-                className: 'w-full mt-4 mb-6 text-white transition duration-200',
+                className: 'w-full mt-4 mb-6 text-white bg-gray-600 hover:bg-gray-800 transition duration-200',
               })}
               href={`/com/create`}>
               Create Community
