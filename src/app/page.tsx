@@ -23,7 +23,7 @@ export default async function Home() {
   const subreddits = await fetchSubreddits(); // Fetching the subreddits
 
   return (
-    <div className="flex flex-col md:flex-row md:space-x-4 py-6">
+    <div className="flex flex-col md:flex-row py-6">
       {/* Sidebar Section for Subreddits */}
       <div className="flex flex-col w-full md:w-1/3 mb-4">
         {/* Subreddit List Section */}
@@ -31,13 +31,15 @@ export default async function Home() {
           <div className='overflow-hidden h-fit rounded-lg border border-gray-200 mb-4'>
             <h2 className='bg-blue-600 px-6 py-4 text-white font-semibold'>Subreddits</h2>
             <ul className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
-            {subreddits.map((subreddit: any) => (
-              <li key={subreddit.id} className='py-3 text-zinc-200'><a href={`/com/${subreddit.name}`}>
-                <p className="font-semibold">{subreddit.name}</p>
-                <p className="text-gray-300">{subreddit.Creator}</p>
-                </a></li>
-            ))}
-          </ul>
+              {subreddits.map((subreddit: any) => (
+                <li key={subreddit.id} className='py-3 text-zinc-200'>
+                  <Link href={`/com/${subreddit.name}`}>
+                    <p className="font-semibold">{subreddit.name}</p>
+                    <p className="text-gray-300">{subreddit.Creator}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </AnimatedComponent>
 
@@ -64,7 +66,7 @@ export default async function Home() {
       </div>
 
       {/* Main Feed Section */}
-      <div className="flex-1">
+      <div className="flex-1 m-6">
         <h1 className="font-bold font-mono text-3xl md:text-4xl text-yellow-200">Your Feed</h1>
         
         {/* Posts Section */}
@@ -73,6 +75,12 @@ export default async function Home() {
           {session ? <CustomFeed /> : <GeneralFeed />}
         </div>
       </div>
+
+
+      
+
+      {/* JavaScript for Mobile Sidebar Toggle */}
+      
     </div>
   );
 }
