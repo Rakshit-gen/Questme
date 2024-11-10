@@ -1,72 +1,73 @@
-'use client'
-import { Home as HomeIcon } from 'lucide-react'
-import Link from 'next/link'
-import { buttonVariants } from '@/components/ui/Button'
-import { getAuthSession } from '@/lib/auth'
-import CustomFeed from '@/components/homepage/CustomFeed'
-import GeneralFeed from '@/components/homepage/GeneralFeed'
-import { motion } from 'framer-motion'
+import { Home as HomeIcon } from 'lucide-react';
+import Link from 'next/link';
+import { buttonVariants } from '@/components/ui/Button';
+import { getAuthSession } from '@/lib/auth';
+import CustomFeed from '@/components/homepage/CustomFeed';
+import GeneralFeed from '@/components/homepage/GeneralFeed';
+
+// Fetching subreddits function
+async function fetchSubreddits() {
+  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
+  const res = await fetch(`${baseUrl}/api/subreddits`);
+  
+  if (!res.ok) {
+    throw new Error('Failed to fetch subreddits');
+  }
+  
+  return res.json();
+}
 
 export default async function Home() {
-  const session = await getAuthSession()
+  const session = await getAuthSession();
+  const subreddits = await fetchSubreddits(); // Fetching the subreddits
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-      <div className="max-w-screen-xl mx-auto p-6">
-        <motion.h1
-          className="font-bold font-mono text-3xl md:text-4xl text-yellow-200 text-center mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          Your Feed
-        </motion.h1>
+    <div className="flex flex-col md:flex-row md:space-x-4 py-6">
+      {/* Sidebar Section for Subreddits */}
+      <div className="flex flex-col w-full md:w-1/3 mb-4">
+        {/* Subreddit List Section */}
+        <div className='overflow-hidden h-fit rounded-lg border border-gray-200 mb-4'>
+          <h2 className='bg-blue-600 px-6 py-4 text-white font-semibold'>Subreddits</h2>
+          <ul className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
+            {subreddits.map((subreddit: any) => (
+              <li key={subreddit.id} className='py-3 text-zinc-200'><a href={`/com/${subreddit.name}`}>
+                <p className="font-semibold">{subreddit.name}</p>
+                <p className="text-gray-300">{subreddit.Creator}</p>
+                </a></li>
+            ))}
+          </ul>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 md:gap-x-6">
-          {/* Feed Section with Animation */}
-          <motion.div
-            className="col-span-2 md:col-span-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            {/* @ts-expect-error server component */}
-            {session ? <CustomFeed /> : <GeneralFeed />}
-          </motion.div>
+        {/* Create Community Section */}
+        <div className='overflow-hidden h-fit rounded-lg border border-gray-200'>
+          <div className='bg-pink-600 px-6 py-4'>
+            <p className='font-semibold py-3 flex items-center gap-1.5'>
+              <HomeIcon className='h-4 w-4' />
+              Create Community
+            </p>
+          </div>
+          <dl className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
+            <Link
+              className={buttonVariants({
+                className: 'w-full mt-4 mb-6 text-white transition duration-200',
+              })}
+              href={`/com/create`}>
+              Create Community
+            </Link>
+          </dl>
+        </div>
+      </div>
 
-          {/* Side Panel for Community Creation */}
-          <motion.div
-            className="overflow-hidden h-fit rounded-lg border border-gray-200 md:order-last"
-            initial={{ x: 300 }}
-            animate={{ x: 0 }}
-            transition={{ duration: 0.6, type: 'spring', stiffness: 80 }}
-          >
-            <div className="bg-pink-600 px-6 py-4 rounded-t-lg shadow-lg">
-              <p className="font-semibold py-3 flex items-center gap-1.5 text-white">
-                <HomeIcon className="h-4 w-4" />
-                Home
-              </p>
-            </div>
-
-            <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 text-gray-800">
-              <div className="flex justify-between gap-x-4 py-3">
-                <p className="text-zinc-500">
-                  Your personal Breadit frontpage. Create your own communities and share them.
-                </p>
-              </div>
-
-              <Link
-                className={buttonVariants({
-                  className: 'w-full mt-4 mb-6 py-2 px-4 rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300',
-                })}
-                href={`/com/create`}
-              >
-                Create Community
-              </Link>
-            </dl>
-          </motion.div>
+      {/* Main Feed Section */}
+      <div className="flex-1">
+        <h1 className="font-bold font-mono text-3xl md:text-4xl text-yellow-200">Your Feed</h1>
+        
+        {/* Posts Section */}
+        <div className='mt-4'>
+          {/* @ts-expect-error server component */}
+          {session ? <CustomFeed /> : <GeneralFeed />}
         </div>
       </div>
     </div>
-  )
+  );
 }
